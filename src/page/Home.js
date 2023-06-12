@@ -6,10 +6,14 @@ import Main from "../components/Main";
 import Explorer from "../components/Explorer";
 import Fundraising from "../components/Fundraising";
 import Portfolio from "../components/Portfolio";
+import Currency from "../components/Currency";
 import bg from "../assets/background-images.png";
 import expl from "../assets/bg3.png";
-
+import Footer from "../components/Footer";
 import { Box } from "@mui/system";
+import Graph from "../components/Graph";
+import Marquees from "../components/Marguee"
+import Round from "../components/Round";
 export default function Home() {
   const boxStyles = {
     backgroundImage: `url(${bg})`,
@@ -30,10 +34,16 @@ export default function Home() {
         <Main />
       </Box>
       <Fundraising />
+      <Marquees/>
+      <Currency />
+<Round/>
+
+      <Graph />
       <Box sx={boxEStyles}>
         <Portfolio />
         <Exchange />
         <Explorer />
+        <Footer />
       </Box>
     </div>
   );

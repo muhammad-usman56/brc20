@@ -73,7 +73,7 @@ const Header = () => {
                     width="100%"
                     px={{ md: 7, sm: 5, xs: 0 }}
                 >
-                    <img src={logo} alt="logo" style={{ maxWidth: '15%',minWidth:'15%' }} />
+                    <img src={logo} alt="logo" style={{ maxWidth: '30%',minWidth:'15%' }} />
                     <Hidden lgDown>
                         <Box display="flex" justifyContent="flex-end" width="100%">
                             <Box display="flex" alignItems="center" mr={5} gap={4}>
