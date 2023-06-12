@@ -10,7 +10,7 @@ export default function Round() {
     useEffect(() => {
 console.log(data)
      
-      },[datas]);
+      },[data]);
    
     
       return (
