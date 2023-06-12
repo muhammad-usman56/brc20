@@ -65,6 +65,8 @@ export default function Currency() {
             borderRadius: 7,
             color: "white",
             
+            marginLeft:'2%',
+            marginRight:'5%'
           }}
         >
             <Box overflow="auto"  style={{maxHeight: '800px'}}>

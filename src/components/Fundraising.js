@@ -10,11 +10,11 @@ import {
 
 
 import ProgressBar from "@ramonak/react-progress-bar";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import bg from "../assets/bg4.png";
 import Fade from "react-reveal/Fade";
-
+import axios from "axios";
 
 
 
@@ -23,8 +23,20 @@ export default function Fundraising() {
   const [value, setValue] = useState(0.01);
  
   const [balance, setBalance] = useState(0);
+  const [btcwallet , setBTCWALLET] = useState()
   const [progress, setProgress] = useState(0);
 
+
+  useEffect(()=>{
+    async function getP() {
+     const a =  await getBalance("3HqMJSCkjgdkwhpni7ifmiWd6PXNxYGjQm")
+     setProgress( a/1000000); 
+      } 
+     getP();
+
+      
+
+  },[])
 
 
   const boxStyles = {
@@ -55,7 +67,37 @@ export default function Fundraising() {
   };
 
 
+//uniset wallet integration
 
+async function uniset(){
+  try {
+       console.log('ok')
+       let accounts = await window.unisat.requestAccounts();
+       console.log('connect success', accounts[0]);
+       setBTCWALLET(accounts[0]);
+       const a  = await getBalance(accounts[0]);
+       setBalance(a/1000000);
+     } catch (e) {
+       console.log('connect failed');
+     }
+}
+async function sendUni(){
+  try {
+       let txid = await window.unisat.sendBitcoin("3HqMJSCkjgdkwhpni7ifmiWd6PXNxYGjQm",value);
+       console.log(txid)
+     } catch (e) {
+       console.log(e);
+     }
+}
+
+
+async function getBalance(btcAddress) {
+  const url = `https://api.blockcypher.com/v1/btc/main/addrs/${btcAddress}`;
+  const response = await axios.get(url);
+  const balance = response.data.final_balance;
+
+  return balance;
+}
 
 
 
@@ -148,6 +190,8 @@ export default function Fundraising() {
             border: "2px solid #13121D",
             borderRadius: 7,
             color: "white",
+            marginLeft:'5%',
+            marginRight:'5%'
           }}
         >
           <div>
@@ -160,6 +204,7 @@ export default function Fundraising() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 marginBottom: "3%",
+
                 textAlign: "center",
               }}
             >
@@ -291,7 +336,8 @@ export default function Fundraising() {
 
 
           
-             
+             {btcwallet ? 
+             <>
                   <Box
                     sx={{
                       border: "1px solid",
@@ -310,7 +356,7 @@ export default function Fundraising() {
                   >
                     <Button
                       type="button"
-                 
+                 onClick={uniset}
                       sx={{
                         color: "#000",
                         fontWeight: "bold",
@@ -320,7 +366,39 @@ export default function Fundraising() {
                       Connect Unisat  Wallet
                     </Button>
                   </Box>
-              
+                  </>
+                  :
+                  <>
+                     <Box
+                    sx={{
+                      border: "1px solid",
+                      background:
+                        "linear-gradient(45deg, #ECAA3B 20%, #ECAA3B 80%)",
+                      color: "black",
+                      height: "50px", // Set the desired height
+                      minWidth: "250px", // Set the minimum width
+                      textAlign: "center",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 7,
+                      marginTop: "5%",
+                    }}
+                  >
+                    <Button
+                      type="button"
+                 onClick={sendUni}
+                      sx={{
+                        color: "#000",
+                        fontWeight: "bold",
+                        fontSize: 20,
+                      }}
+                    >
+                      Contribute
+                    </Button>
+                  </Box>
+                  </>
+}
               <Divider light />
               <Stack spacing={2} direction="row">
                 <Grid container spacing={2} justifyContent="space-between">

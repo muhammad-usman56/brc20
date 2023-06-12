@@ -33,7 +33,8 @@ console.log(data)
             border: "2px solid #13121D",
             borderRadius: 7,
             color: "white",
-            
+            marginLeft:'2%',
+            marginRight:'5%'
           }}
         >
             <Box overflow="auto"  style={{maxHeight: '800px'}}>
