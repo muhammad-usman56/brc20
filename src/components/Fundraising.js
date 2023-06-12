@@ -17,7 +17,6 @@ import Fade from "react-reveal/Fade";
 import axios from "axios";
 
 
-
 export default function Fundraising() {
   
   const [value, setValue] = useState(0.01);
@@ -38,6 +37,11 @@ export default function Fundraising() {
 
   },[])
 
+  const max = () => {
+    console.log("max-ing");
+    setValue(balance);
+
+}
 
   const boxStyles = {
     // position: "relative",
@@ -240,7 +244,7 @@ async function getBalance(btcAddress) {
               </Typography>
               <div className="claim">
                 <span
-            
+            onClick={max}
                   style={{
                     cursor: "pointer",
                     marginTop: "5%",
@@ -305,33 +309,7 @@ async function getBalance(btcAddress) {
                 Contribute with BTC
               </Typography>
 
-                  <Box
-                    sx={{
-                      border: "1px solid",
-                      background: "linear-gradient(45deg,white 20%, white 80%)",
-                      color: "black",
-                      height: "50px", // Set the desired height
-                      minWidth: "250px", // Set the minimum width
-                      textAlign: "center",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: 7,
-                      marginTop: "5%",
-                    }}
-                  >
-                    <Button
-                      type="button"
-                      sx={{
-                        color: "#000",
-                        fontWeight: "bold",
-                        fontSize: 20,
-                      }}
-           
-                    >
-                      Connect BTC Wallet
-                    </Button>
-                  </Box>
+                 
              
 
 

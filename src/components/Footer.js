@@ -27,7 +27,7 @@ const Footer = () => {
           }}
         >
           <Grid container spacing={2}>
-            <Grid item lg={2} md={4} xs={6}>
+            <Grid item lg={3} md={4} xs={6} >
               <Typography
                 variant="h6"
                 sx={{ 
@@ -45,24 +45,32 @@ const Footer = () => {
               sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Community</Typography><br/>
+              variant="p">
+                <a href="" style={{textDecoration:'none',color:'white'}}>
+                Community
+                </a>
+                </Typography><br/>
               <Typography
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Knowledge base</Typography><br/>
+              variant="p">
+                 <a href="" style={{textDecoration:'none',color:'white'}}>
+                Knowledge base</a></Typography><br/>
               <Typography 
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Contact</Typography><br/>
+              variant="p">
+              <a href="" style={{textDecoration:'none',color:'white'}}> 
+                Contact  </a></Typography><br/>
               <Typography
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">List Coin</Typography><br/>
+              variant="p"> <a href="" style={{textDecoration:'none',color:'white'}}>List Coin</a></Typography><br/>
             </Grid>
-            <Grid item lg={2} md={4} xs={6}>
+            <Grid item lg={3} md={4} xs={6}>
             <Typography
                 variant="h6"
                 sx={{ 
@@ -74,30 +82,38 @@ const Footer = () => {
                 }}
                
               >
-                Company
+        Company 
               </Typography>
               <Typography
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">About</Typography><br/>
+              variant="p">
+                <a href="" style={{textDecoration:'none',color:'white'}}>
+                About </a> </Typography><br/>
               <Typography
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Affiliate Program</Typography><br/>
+              variant="p">
+                 <a href="" style={{textDecoration:'none',color:'white'}}>
+                Affiliate Program</a></Typography><br/>
               <Typography 
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Career</Typography><br/>
+              variant="p">
+              <a href="" style={{textDecoration:'none',color:'white'}}>
+                Career   </a></Typography><br/>
               <Typography
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Blogs</Typography>
+              variant="p">
+                 <a href="" style={{textDecoration:'none',color:'white'}}>
+                Blogs</a></Typography>
             </Grid>
-            <Grid item lg={2} md={4} xs={6}>
+            <Grid item lg={3} md={4} xs={6}>
             <Typography
                 variant="h6"
                 sx={{ 
@@ -115,24 +131,34 @@ const Footer = () => {
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Exchange</Typography><br/>
+              variant="p">
+                 <a href="" style={{textDecoration:'none',color:'white'}}>
+                Exchange</a>
+                
+                </Typography><br/>
               <Typography 
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Stake</Typography><br/>
+              variant="p">
+                 <a href="" style={{textDecoration:'none',color:'white'}}>
+                Stake</a></Typography><br/>
               <Typography 
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Swap</Typography><br/>
+              variant="p">
+                  <a href="" style={{textDecoration:'none',color:'white'}}>
+                Swap</a></Typography><br/>
               <Typography
                sx={{
                 fontFamily: "Futura Italic, Arial, sans-serif",
               }}
-              variant="p">Store</Typography>
+              variant="p">
+                 <a href="" style={{textDecoration:'none',color:'white'}}>
+                Store</a></Typography>
             </Grid>
-            <Grid item lg={2} md={4} xs={6}>
+            <Grid item lg={3} md={4} xs={6}>
             <Typography
                 variant="h6"
                 sx={{ 
@@ -147,21 +173,8 @@ const Footer = () => {
               User Agreement
               </Typography>
             </Grid>
-            <Grid item lg={2} md={4} xs={6}>
-            <Typography
-                variant="h6"
-                sx={{ 
-                    background:
-                    "linear-gradient(45deg, #6f19ac 20%, #a40d63 50%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    fontWeight:'bold'
-                }}
-               
-              >
-        Privacy Policy
-              </Typography>
-            </Grid>
+           
+        
           </Grid>
         </Typography>
       </Box>
