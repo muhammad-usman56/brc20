@@ -36,7 +36,7 @@ export default function Home() {
       <Fundraising />
       <Marquees/>
       <Currency />
-<Round/>
+{/* <Round/> */}
 
       <Graph />
       <Box sx={boxEStyles}>
