@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import {Box,Container,Grid, Table, TableHead, TableBody, TableRow, TableCell,Typography } from '@mui/material';
-import { ApiCall } from "../backend/Auth"
+
 import Fade from "react-reveal/Fade";
 import axios from 'axios';
 export default function Currency() {
@@ -21,11 +21,7 @@ export default function Currency() {
     });
 
       },[datas]);
-    const data = [
-        { id: 1, name: 'John Doe', age: 25 },
-        { id: 2, name: 'Jane Smith', age: 30 },
-        { id: 3, name: 'Bob Johnson', age: 35 },
-      ];
+  
     
       return (
         <Box
@@ -88,7 +84,7 @@ export default function Currency() {
           <TableBody>
             {datas && datas.map((row) => (
               <TableRow key={row.name}>
-                 <TableCell style={{ color: 'white' }}><img style={{width:'55px',height:'5%' , borderRadius:15}} src={row.iconUrl} />   </TableCell>
+                 <TableCell style={{ color: 'white' }}><img style={{width:'55px',height:'5%' , borderRadius:15}} src={row.iconUrl} alt="nothing"/>   </TableCell>
                 <TableCell style={{ color: 'white' }}>{ row.name}</TableCell>
                 <TableCell style={{ color: 'white' }}>{row.symbol}</TableCell>
                 <TableCell style={{ color: 'white' }}>{row.rank}</TableCell>

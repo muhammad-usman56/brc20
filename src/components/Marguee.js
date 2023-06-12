@@ -1,7 +1,5 @@
 import React from "react";
-import { Typography, Container } from "@mui/material";
-import Fade from "react-reveal/Fade";
-import Marquee from "react-fast-marquee";
+import {  Container } from "@mui/material";
 
 const Marquees = () => {
   return (

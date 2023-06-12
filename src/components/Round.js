@@ -1,11 +1,10 @@
-import React,{useState,useEffect} from 'react'
-import {Box,Container,Grid, Table, TableHead, TableBody, TableRow, TableCell,Typography } from '@mui/material';
-import { ApiCall } from "../backend/Auth"
-import Fade from "react-reveal/Fade";
-import axios from 'axios';
+import React,{useEffect} from 'react'
+import {Box,Container,Grid, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+
+
 import { data } from "../backend/table"
 export default function Round() {
-    const [datas, setData] = useState(null);
+    
   
     useEffect(() => {
 console.log(data)

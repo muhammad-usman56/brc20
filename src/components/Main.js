@@ -1,12 +1,9 @@
-import { Box, Container, Grid, Stack, Typography, Button } from "@mui/material";
+import { Box, Container, Grid,  Typography, Button } from "@mui/material";
 import React from "react";
 import main from "../assets/4.png";
 import Fade from "react-reveal/Fade";
 export default function Main() {
-  const iconStyle = {
-    width: "50px",
-    height: "50px",
-  };
+  
   return (
     <Box
       id="contact"

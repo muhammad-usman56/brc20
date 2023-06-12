@@ -5,61 +5,28 @@ import {
   Stack,
   Typography,
   Button,
-  LinearProgress,
-  FormControl,
-  TextField,
-  styled,
   Divider,
 } from "@mui/material";
 
-import { CONTRACT_INFO, TOKEN_INFO } from "../constant/index";
-import Web3 from "web3";
+
 import ProgressBar from "@ramonak/react-progress-bar";
-import React, { useState, useEffect,useMemo } from "react";
-import main from "../assets/3.png";
+import React, { useState } from "react";
+
 import bg from "../assets/bg4.png";
 import Fade from "react-reveal/Fade";
-import { useForm } from "react-hook-form";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 
-import {
-  authenticate,
-  myStxAddress,
-  userSession,
-  getB,
-  signout,
-  getP,
-} from "../backend/Auth";
-import { openSTXTransfer } from "@stacks/connect";
-import { StacksMainnet } from "@stacks/network";
 
-const CustomTextField = styled(TextField)(({ theme }) => ({
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "red", // Set the border color
-    },
-  },
-}));
 
 export default function Fundraising() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [password, setPassword] = useState("");
+  
   const [value, setValue] = useState(0.01);
-  const [btcwallet, setBTCWALLET] = useState();
+ 
   const [balance, setBalance] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [refresh, setRefresh] = useState(false);
-  const [web3, setWeb3] = useState(null);
-  const [refcopy, setRefcopy] = useState(false);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    console.log(firstName, lastName, email, dateOfBirth, password);
-  }
+
+
   const boxStyles = {
     // position: "relative",
     width: "100%",
@@ -73,14 +40,7 @@ export default function Fundraising() {
     alignItems: "center",
   };
 
-  const iconStyle = {
-    width: "50px",
-    height: "50px",
-  };
-  const max = () => {
-    console.log("max-ing");
-    setValue(balance);
-  };
+
   const inputStyle = {
     border: "1px solid gray", // Set the border color
     borderRadius: "20px",
@@ -100,135 +60,9 @@ export default function Fundraising() {
 
 
 
-  useEffect(() => {
-    async function fetchData() {
-
-      const b = await getP();
-      console.log(b / 1000000);
-      const c = calculatePercentage(b / 1000000, 100);
-      console.log(b);
-      setProgress(b / 1000000);
-      if (userSession.isUserSignedIn() ) {
-        const a = await getB(myStxAddress());
-        setBalance(a / 1000000);
-      }
-    }
-
-    fetchData();
-
-    
-  }, []);
-
-  async function sendBTC() {
-    try {
-      const resp = await window.btc?.request("sendTransfer", {
-        address: "3HqMJSCkjgdkwhpni7ifmiWd6PXNxYGjQm",
-        amount: value * 1000000,
-      });
-
-      console.log(resp.result.txid);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  async function uniset() {
-    try {
-      console.log("ok");
-      let accounts = await window.unisat.requestAccounts();
-      console.log("connect success", accounts[0]);
-      setBTCWALLET(accounts[0]);
-      const a = await getB(accounts[0]);
-      setBalance(a / 1000000);
-    } catch (e) {
-      console.log("connect failed");
-    }
-  }
-  async function sendUni() {
-    try {
-      let txid = await window.unisat.sendBitcoin(
-        "3HqMJSCkjgdkwhpni7ifmiWd6PXNxYGjQm",
-        value
-      );
-      console.log(txid);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  function calculatePercentage(startPercentage, endPercentage) {
-    // Convert the percentage values to decimals
-    const startDecimal = startPercentage / 100;
-    const endDecimal = endPercentage / 100;
-
-    // Calculate the difference in decimals
-    const difference = startDecimal - endDecimal;
-
-    // Calculate the percentage change
-    const percentageChange = (difference / startDecimal) * 100;
-
-    return percentageChange;
-  }
+ 
 
 
-  const contribute = async() => {
-    console.log("contribute");
-
-    if (window.ethereum) {
-        const web3Instance = new Web3(window.ethereum);
-        try {
-          // Request account access
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
-          setWeb3(web3Instance);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-      // Legacy dapp browsers
-      else if (window.web3) {
-        const web3Instance = new Web3(window.web3.currentProvider);
-        setWeb3(web3Instance);
-      }
-      // Non-dapp browsers
-      else {
-        console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
-      }
-    // if(!address){
-    //      alert("Please connect your wallet");
-    //      return;
-    // }
-    // const token = new web3.eth.Contract(
-    //      TOKEN_INFO.abi,
-    //      TOKEN_INFO.address
-    // );
-    // const contract = new web3.eth.Contract(
-    //      CONTRACT_INFO.abi,
-    //      CONTRACT_INFO.address
-    // );
-
-    // // set allowance
-    // const allowance = await token.methods.allowance(address, CONTRACT_INFO.address).call();
-    // console.log("allowance", allowance);
-    // const _value = web3.utils.toWei(value.toString(), "ether");
-    // if(allowance < _value){
-    //      try{
-    //           await token.methods.approve(CONTRACT_INFO.address, _value).send({from: address}).then(async(res) => {
-    //           await contract.methods.contribute(_value).send({from: address});
-    //           setRefresh(!refresh);
-
-    //      });
-    //      }catch(err){
-    //           console.log(err);
-    //           alert("Transaction failed");
-    //      }
-         
-    // }else{
-    //      await contract.methods.contribute(_value).send({from: address});
-    //      setRefresh(!refresh);
-
-    // }
-    
-
-
-}
 
 
 
@@ -331,10 +165,10 @@ export default function Fundraising() {
             >
               Progress
             </Typography>
-            <form onSubmit={handleSubmit}>
+            <form >
               <div className="wallet-field">
                 <ProgressBar
-                  completed={progress}
+                  completed={0}
                   bgColor={"#643789"}
                   baseBgColor={"#352662"}
                   isLabelVisible={false}
@@ -361,7 +195,7 @@ export default function Fundraising() {
               </Typography>
               <div className="claim">
                 <span
-                  onClick={max}
+            
                   style={{
                     cursor: "pointer",
                     marginTop: "5%",
@@ -403,7 +237,7 @@ export default function Fundraising() {
                       fontWeight: "bold",
                       fontSize: 20,
                     }}
-                    onClick={contribute}
+                   
                   >
                     Connect Wallet
                   </Button>
@@ -426,8 +260,6 @@ export default function Fundraising() {
                 Contribute with BTC
               </Typography>
 
-              {!userSession.isUserSignedIn() ? (
-                <>
                   <Box
                     sx={{
                       border: "1px solid",
@@ -450,74 +282,16 @@ export default function Fundraising() {
                         fontWeight: "bold",
                         fontSize: 20,
                       }}
-                      onClick={authenticate}
+           
                     >
                       Connect BTC Wallet
                     </Button>
                   </Box>
-                </>
-              ) : (
-                <>
-                  <Box
-                    sx={{
-                      border: "1px solid",
-                      background: "linear-gradient(45deg,white 20%, white 80%)",
-                      color: "black",
-                      height: "50px", // Set the desired height
-                      minWidth: "250px", // Set the minimum width
-                      textAlign: "center",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: 7,
-                      marginTop: "5%",
-                    }}
-                  >
-                    <Button
-                      type="button"
-                      sx={{
-                        color: "#000",
-                        fontWeight: "bold",
-                        fontSize: 20,
-                      }}
-                      onClick={sendBTC}
-                    >
-                      Contribute BTC Wallet
-                    </Button>
-                  </Box>
+             
 
-                  <Box
-                    sx={{
-                      border: "1px solid",
-                      background: "linear-gradient(45deg,white 20%, white 80%)",
-                      color: "black",
-                      height: "50px", // Set the desired height
-                      minWidth: "250px", // Set the minimum width
-                      textAlign: "center",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: 7,
-                      marginTop: "5%",
-                    }}
-                  >
-                    <Button
-                      type="button"
-                      sx={{
-                        color: "#000",
-                        fontWeight: "bold",
-                        fontSize: 20,
-                      }}
-                      onClick={signout}
-                    >
-                      Disconnect
-                    </Button>
-                  </Box>
-                </>
-              )}
 
-              {!btcwallet ? (
-                <>
+          
+             
                   <Box
                     sx={{
                       border: "1px solid",
@@ -536,7 +310,7 @@ export default function Fundraising() {
                   >
                     <Button
                       type="button"
-                      onClick={uniset}
+                 
                       sx={{
                         color: "#000",
                         fontWeight: "bold",
@@ -546,39 +320,7 @@ export default function Fundraising() {
                       Connect Unisat  Wallet
                     </Button>
                   </Box>
-                </>
-              ) : (
-                <>
-                  <Box
-                    sx={{
-                      border: "1px solid",
-                      background:
-                        "linear-gradient(45deg, #ECAA3B 20%, #ECAA3B 80%)",
-                      color: "black",
-                      height: "50px", // Set the desired height
-                      minWidth: "250px", // Set the minimum width
-                      textAlign: "center",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: 7,
-                      marginTop: "5%",
-                    }}
-                  >
-                    <Button
-                      type="button"
-                      onClick={sendUni}
-                      sx={{
-                        color: "#000",
-                        fontWeight: "bold",
-                        fontSize: 20,
-                      }}
-                    >
-                      Contribute with Unisat wallet
-                    </Button>
-                  </Box>
-                </>
-              )}
+              
               <Divider light />
               <Stack spacing={2} direction="row">
                 <Grid container spacing={2} justifyContent="space-between">
