@@ -115,7 +115,7 @@ export default function Main() {
                         }}
                       >
                         <a
-                          href=""
+                          href="https://brc-20-dex.gitbook.io/brc-20-dex-with-fragmentation/"
                           target="_blank"
                           rel="noreferrer"
                           style={{ color: "#fff", textDecoration: "none" }}

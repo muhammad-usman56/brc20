@@ -7,7 +7,14 @@ import {
   Button,
   Divider,
 } from "@mui/material";
+import {
+  authenticate,
+  myStxAddress,
+  userSession,
 
+  signout,
+ 
+} from "../backend/Auth";
 
 import ProgressBar from "@ramonak/react-progress-bar";
 import React, { useState,useEffect } from "react";
@@ -310,7 +317,34 @@ async function getBalance(btcAddress) {
               </Typography>
 
                  
-             
+              <Box
+                    sx={{
+                      border: "1px solid",
+                      background:
+                        "linear-gradient(45deg, #ECAA3B 20%, #ECAA3B 80%)",
+                      color: "black",
+                      height: "50px", // Set the desired height
+                      minWidth: "250px", // Set the minimum width
+                      textAlign: "center",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 7,
+                      marginTop: "5%",
+                    }}
+                  >
+                    <Button
+                      type="button"
+                 onClick={authenticate}
+                      sx={{
+                        color: "#000",
+                        fontWeight: "bold",
+                        fontSize: 20,
+                      }}
+                    >
+                 Hiro Wallet
+                    </Button>
+                  </Box>
 
 
           

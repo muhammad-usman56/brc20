@@ -26,31 +26,31 @@ const Header = () => {
     let data = [
         {
             name: 'Home',
-            url: 'deep',
+            url: 'https://brc-20dex.io/',
         },
         {
             name: 'Trade',
-            url: 'about',
+            url: 'https://brc-20dex.io/Trade',
         },
         {
             name: 'Swap',
-            url: 'howtobuy',
+            url: 'https://brc-20dex.io/Swap',
         },
         {
-            name: 'Store',
-            url: 'tokenomics',
+            name: 'Invest',
+            url: 'https://brc-20dex.io/Invest',
         },
         {
             name: 'Airdrop',
-            url: 'roadmap',
+            url: 'https://brc-20dex.io/Airdrop',
         },
         {
             name: 'Mining',
-            url: 'contact',
+            url: 'https://brc-20dex.io/Mining',
         },
         {
             name: 'ICO',
-            url: 'contact',
+            url: 'https://brc-20dex.io/ICO',
         },
     ];
 
@@ -80,14 +80,8 @@ const Header = () => {
                                 {data?.map(({ name, url }, i) => {
                                     return (
                                         <Box key={i}>
-                                            <Link
-                                                activeClass="active"
-                                                to={url}
-                                                spy={true}
-                                                smooth={true}
-                                                offset={-70}
-                                                duration={500}
-                                            >
+                                          
+                                          <a href={url} style={{textDecoration:'none',color:'white'}}>
                                                 <Typography
                                                     sx={{
                                                         color: `${theme.palette.text.lightblue}`,
@@ -99,7 +93,8 @@ const Header = () => {
                                                 >
                                                     {name}
                                                 </Typography>
-                                            </Link>
+                                                </a>
+                                               
                                         </Box>
                                     );
                                 })}
@@ -162,14 +157,7 @@ const Header = () => {
                         {data?.map(({ name, url }, i) => {
                             return (
                                 <Box key={i}>
-                                    <Link
-                                        activeClass="active"
-                                        to={url}
-                                        spy={true}
-                                        smooth={true}
-                                        offset={-70}
-                                        duration={500}
-                                    >
+                                  <a href={url}>
                                         <Typography
                                             sx={{
                                                 fontSize: '16px',
@@ -178,7 +166,7 @@ const Header = () => {
                                         >
                                             {name}
                                         </Typography>
-                                    </Link>
+                                    </a>
                                 </Box>
                             );
                         })}
