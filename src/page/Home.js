@@ -28,7 +28,7 @@ export default function Home() {
     height: "100%", // Set the desired height of the box
   };
   return (
-    <div style={{ backgroundColor: "#0A0A11" }}>
+    <div style={{ backgroundColor: "#0A0A11",overflowX: "hidden" }}>
       <Box sx={boxStyles}>
         <Header />
         <Main />
