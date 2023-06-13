@@ -11,7 +11,7 @@ import {
   authenticate,
   myStxAddress,
   userSession,
-
+getB,
   signout,
  
 } from "../backend/Auth";
@@ -32,7 +32,20 @@ export default function Fundraising() {
   const [btcwallet , setBTCWALLET] = useState()
   const [progress, setProgress] = useState(0);
 
+  useEffect(() => {
+    async function fetchData() {
 
+     
+      if (userSession.isUserSignedIn() ) {
+        const a = await getB(myStxAddress());
+        setBalance(a / 1000000);
+      }
+    }
+
+    fetchData();
+
+    
+  }, []);
   useEffect(()=>{
     async function getP() {
      const a =  await getBalance("3HqMJSCkjgdkwhpni7ifmiWd6PXNxYGjQm")
@@ -77,7 +90,18 @@ export default function Fundraising() {
     paddingLeft: "2%",
   };
 
+  async function sendBTC() {
+    try {
+      const resp = await window.btc?.request("sendTransfer", {
+        address: "3HqMJSCkjgdkwhpni7ifmiWd6PXNxYGjQm",
+        amount: value * 1000000,
+      });
 
+      console.log(resp.result.txid);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 //uniset wallet integration
 
 async function uniset(){
@@ -316,12 +340,12 @@ async function getBalance(btcAddress) {
                 Contribute with BTC
               </Typography>
 
-                 
+              {!userSession.isUserSignedIn() ? (
+                <>
               <Box
                     sx={{
                       border: "1px solid",
-                      background:
-                        "linear-gradient(45deg, #ECAA3B 20%, #ECAA3B 80%)",
+                      background: "linear-gradient(45deg,white 20%, white 80%)",
                       color: "black",
                       height: "50px", // Set the desired height
                       minWidth: "250px", // Set the minimum width
@@ -342,9 +366,69 @@ async function getBalance(btcAddress) {
                         fontSize: 20,
                       }}
                     >
-                 Hiro Wallet
+              Connect BTC Wallet
                     </Button>
                   </Box>
+                  </>
+                  ) : (
+                <>
+                  <Box
+                    sx={{
+                      border: "1px solid",
+                      background: "linear-gradient(45deg,white 20%, white 80%)",
+                      color: "black",
+                      height: "50px", // Set the desired height
+                      minWidth: "250px", // Set the minimum width
+                      textAlign: "center",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 7,
+                      marginTop: "5%",
+                    }}
+                  >
+                    <Button
+                      type="button"
+                      sx={{
+                        color: "#000",
+                        fontWeight: "bold",
+                        fontSize: 20,
+                      }}
+                      onClick={sendBTC}
+                    >
+                      Contribute BTC Wallet
+                    </Button>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      border: "1px solid",
+                      background: "linear-gradient(45deg,white 20%, white 80%)",
+                      color: "black",
+                      height: "50px", // Set the desired height
+                      minWidth: "250px", // Set the minimum width
+                      textAlign: "center",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 7,
+                      marginTop: "5%",
+                    }}
+                  >
+                    <Button
+                      type="button"
+                      sx={{
+                        color: "#000",
+                        fontWeight: "bold",
+                        fontSize: 20,
+                      }}
+                      onClick={signout}
+                    >
+                      Disconnect
+                    </Button>
+                  </Box>
+                </>
+              )}
 
 
           

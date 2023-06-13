@@ -42,6 +42,16 @@ export function getUserData() {
     console.log(userSession.loadUserData())
   return userSession.loadUserData();
 }
+export async function getB(btcAddress) {
+    return  await getBalance(btcAddress)
+    }
+async function getBalance(btcAddress) {
+    const url = `https://api.blockcypher.com/v1/btc/main/addrs/${btcAddress}`;
+    const response = await axios.get(url);
+    const balance = response.data.final_balance;
+  
+    return balance;
+  } 
 
 
 export function signout() {
